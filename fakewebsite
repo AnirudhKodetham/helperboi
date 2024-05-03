@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .add-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button class="add-btn" onclick="openPopup()">Add Row</button>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>Serial No.</th>
+        <th>Name</th>
+        <th>Distinction</th>
+        <th>Marks</th>
+        <th>Remarks</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data will be added dynamically here -->
+    </tbody>
+  </table>
+</div>
+
+<div id="popup" class="popup">
+  <span class="close" onclick="closePopup()">x</span>
+  <h2>Add/Edit Row</h2>
+  <form id="popup-form" onsubmit="submitData(event)">
+    <label for="serial">Serial No.:</label><br>
+    <input type="number" id="serial" name="serial" required><br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" maxlength="30" required><br>
+    <label for="distinction">Distinction:</label><br>
+    <select id="distinction" name="distinction" required>
+      <option value="pass">Pass</option>
+      <option value="fail">Fail</option>
+    </select><br>
+    <label for="marks">Marks:</label><br>
+    <input type="number" id="marks" name="marks" min="1" max="100" required><br>
+    <label for="remarks">Remarks:</label><br>
+    <textarea id="remarks" name="remarks" maxlength="300"></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div id="delete-popup" class="popup">
+  <h2>Are you sure you want to delete the row?</h2>
+  <button onclick="confirmDelete(true)">Yes</button>
+  <button onclick="confirmDelete(false)">No</button>
+</div>
+
+<script>
+  function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  function submitData(event) {
+    event.preventDefault();
+    const serial = document.getElementById('serial').value;
+    const name = document.getElementById('name').value;
+    const distinction = document.getElementById('distinction').value;
+    const marks = document.getElementById('marks').value;
+    const remarks = document.getElementById('remarks').value;
+
+    const table = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+    const cells = [serial, name, distinction, marks, remarks];
+    for (let i = 0; i < 5; i++) {
+      const cell = newRow.insertCell();
+      cell.appendChild(document.createTextNode(cells[i]));
+    }
+    const actionsCell = newRow.insertCell();
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.onclick = function () {
+      openPopup();
+      document.getElementById('serial').value = serial;
+      document.getElementById('name').value = name;
+      document.getElementById('distinction').value = distinction;
+      document.getElementById('marks').value = marks;
+      document.getElementById('remarks').value = remarks;
+    };
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = function () {
+      confirmDelete(false);
+    };
+    actionsCell.appendChild(editBtn);
+    actionsCell.appendChild(deleteBtn);
+
+    closePopup();
+  }
+
+  function confirmDelete(confirm) {
+    if (confirm) {
+      const table = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+      table.deleteRow(deleteRowIndex);
+    }
+    document.getElementById('delete-popup').style.display = 'none';
+  }
+
+  let deleteRowIndex;
+  function deleteRow(row) {
+    deleteRowIndex = row.parentNode.parentNode.rowIndex;
+    document.getElementById('delete-popup').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
