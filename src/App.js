@@ -37,6 +37,7 @@ function App() {
         </form>
         {submittedName && <h2>Hi {submittedName}, welcome to my channel!</h2>}
       </div>
+      
     </div>
   );
 }
