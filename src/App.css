@@ -1,38 +1,40 @@
-.App {
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.counter-container, .greeting-container {
+  margin: 20px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.counter-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.counter-number {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.greeting-container form {
+  margin: 20px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#greeting-container input {
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+#greeting-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#greeting-container h2 {
+  color: green;
+  font-size: 24px;
 }
