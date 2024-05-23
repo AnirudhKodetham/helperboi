@@ -1,0 +1,19 @@
+.child-box {
+    border: 2px solid blue;
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .child-box h2 {
+    margin-bottom: 10px;
+  }
+  
+  .child-box input {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .child-box button {
+    padding: 5px 10px;
+  }
+  

@@ -1,0 +1,10 @@
+.parent-box {
+    border: 2px solid black;
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .parent-box h1 {
+    margin-bottom: 20px;
+  }
+  
